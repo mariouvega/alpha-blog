@@ -1,5 +1,7 @@
 # README
 
+This is the repository for the first alpha-blog app of the Complete Ruby on Rails Developer Course
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
