@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+	# THIS CALLS THE METHOD FOR ALL THE SPECIFIED ACTIONS AND DOES T BEFORE ANY ACTION
+	before_action :set_article, only: [:edit, :update, :show, :destroy]
 
 	def index
 		@articles = Article.all
@@ -9,7 +11,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-		@article = Article.find(params[:id]) # THIS HANDLED BY THE UPDATE ACTION
+		 # THIS HANDLED BY THE UPDATE ACTION
 	end
 
 	def create
@@ -29,11 +31,11 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		@article = Article.find(params[:id])
+		
 	end
 
 	def destroy
-		@article = Article.find(params[:id])
+		
 		@article.destroy
 
 		flash[:notice] = "Article has been deleted"
@@ -42,7 +44,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		@article = Article.find(params[:id])
+		
 		if @article.update(article_params)
 			flash[:notice] = "Article was updated"
 			redirect_to article_path(@article)
@@ -52,6 +54,11 @@ class ArticlesController < ApplicationController
 	end
 
 	private
+
+	def set_article
+		# WE CREATED THIS BECAUSE IT WAS REPEATED CODE IN A FEW ACTIONS, SO WE MADE IT INTO A METHOD AND CALLED IT IN THE BEFORE_ACTION ON TOP
+		@article = Article.find(params[:id])
+	end
 
 	def article_params
 		params.require(:article).permit(:title, :description) # THESE ARE STRONG PARAMS AND IS WHAT ALLOWS RAILS TO CREATE A NEW ARTICLE BECAUSE WE WHITE LIST THE PARAMS
