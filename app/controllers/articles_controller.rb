@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
 		@article = Article.new(article_params) # Remember we have to whitelist our params, that can be done and re-used in the private section
 
 		if @article.save
-			flash[:notice] = "Article was successfully created!"
+			flash[:success] = "Article was successfully created!"
 			redirect_to article_path(@article)
 		else
 			render 'new' # or it can be --> :new
@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
 		
 		@article.destroy
 
-		flash[:notice] = "Article has been deleted"
+		flash[:danger] = "Article has been deleted"
 
 		redirect_to articles_path
 	end
@@ -46,7 +46,7 @@ class ArticlesController < ApplicationController
 	def update
 		
 		if @article.update(article_params)
-			flash[:notice] = "Article was updated"
+			flash[:success] = "Article was updated"
 			redirect_to article_path(@article)
 		else
 			render 'edit'
